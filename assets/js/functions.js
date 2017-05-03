@@ -1,13 +1,13 @@
 var settings = {
 
-  cutoff: 200,
-  shift: 0,
-  synth: "piano",
-  speed_multiplier: 1
+    cutoff: 200,
+    shift: 0,
+    synth: "piano",
+    speed_multiplier: 1
 
 };
 
-if ( !(window.File && window.FileReader && window.FileList && window.Blob) ) {
+if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
 
     document.querySelector(".top p").textContent = "Reading files not supported by this browser";
 
@@ -42,30 +42,31 @@ if ( !(window.File && window.FileReader && window.FileList && window.Blob) ) {
 
 function parseData(data) {
 
-  data = data.tracks[1].notes;
-  answer = "";
+    data = data.tracks[1].notes;
+    answer = "";
 
-  if(settings.cutoff == "false") {
+    if (settings.cutoff == "false") {
 
-    cutoff = data.length;
+        cutoff = data.length;
 
-  } else {
+    } else {
 
-    cutoff = settings.cutoff;
+        cutoff = settings.cutoff;
 
-  }
+    }
 
-  answer += "use_synth :piano \n\n";
+    answer += "# MidiToSonicPi created by Olly, file made " + new Date() + "\n\n";
+    answer += "use_synth :piano \n\n";
 
-  for( var i = 0; i < cutoff; i++ ) {
+    for (var i = 0; i < cutoff; i++) {
 
-    answer += "play " + (data[i].midi + settings.shift) + ", release: " + Math.round(data[i].time * settings.speed_multiplier * 1000)/1000 + "\n";
-    answer += "sleep " + Math.round(data[i].duration * settings.speed_multiplier * 1000)/1000 + "\n";
-    answer += "\n";
+        answer += "play " + (data[i].midi + settings.shift) + ", release: " + Math.round(data[i].time * settings.speed_multiplier * 1000) / 1000 + "\n";
+        answer += "sleep " + Math.round(data[i].duration * settings.speed_multiplier * 1000) / 1000 + "\n";
+        answer += "\n";
 
-  }
+    }
 
-  return answer;
+    return answer;
 
 }
 
@@ -86,17 +87,24 @@ function parseFile(file) {
 var copy_textarea = document.querySelector(".copy");
 
 copy_textarea.addEventListener('click', function(e) {
-  var code = document.querySelector('.result');
-  code.select();
+    var code = document.querySelector('.result');
+    code.select();
 
-  try {
 
-    var successful = document.execCommand('copy');
-    var msg = successful ? 'successful' : 'unsuccessful';
+    try {
 
-  } catch (err) {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'successful' : 'unsuccessful';
 
-    alert('Oops, unable to copy – Click on the text and then press Ctrl-A.');
-    
-  }
+    } catch (err) {
+
+        alert('Oops, unable to copy – Click on the text and then press Ctrl-A then Ctrl C.');
+
+    }
+
+    if (document.selection) {
+        document.selection.empty();
+    } else if (window.getSelection) {
+        window.getSelection().removeAllRanges();
+    }
 });

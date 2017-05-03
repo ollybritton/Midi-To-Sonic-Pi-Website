@@ -1,6 +1,3 @@
-TEAM
-This website was hand-crafted.
-
 Olly Britton
 Codey Person
 ollybritton.com
@@ -15,10 +12,15 @@ https://github.com/pugjs/pug
 Sass - Nice Looking Css
 http://sass-lang.com/guide
 
+JQuery – Don't judge.
+
+MidiConvert – JS Library for converting midi to Tone.js JSON.
+https://github.com/Tonejs/MidiConvert
+
 
 _______________________________________________________________________________
 
 FONTS
 
-Roboto
-fonts.google.com
+Well, here's the font-stack:
+Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif
